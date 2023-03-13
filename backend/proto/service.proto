@@ -1,31 +1,15 @@
 syntax = "proto3";
 package firefly;
 
-service Firefly {
+import "shared.proto";
+
+service Service {
   rpc On(Empty) returns (Ack) {}
   rpc Off(Empty) returns (Ack) {}
   rpc SetRgb(Rgb) returns (Ack) {}
   rpc SetWhite(White) returns (Ack) {}
   rpc SetGradient(Gradient) returns (Ack) {}
   rpc GetState(Empty) returns (State) {}
-}
-
-message State {
-  bool on = 1;
-  repeated Led leds = 2;
-}
-
-message Led {
-  int32 red = 1;
-  int32 green = 2;
-  int32 blue = 3;
-  int32 white = 4;
-}
-
-message Rgb {
-  int32 red = 1;
-  int32 green = 2;
-  int32 blue = 3;
 }
 
 message White {
@@ -36,8 +20,7 @@ message Gradient {
   repeated Rgb colors = 2;
 }
 
-message Empty {}
-
-message Ack {
-  bool status = 1;
+message State {
+  bool on = 1;
+  repeated Led leds = 2;
 }

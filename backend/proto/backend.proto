@@ -1,0 +1,54 @@
+syntax = "proto3";
+package firefly;
+
+import "shared.proto";
+
+service Backend {
+  rpc On(StripIds) returns (Ack) {}
+  rpc Off(StripIds) returns (Ack) {}
+  rpc SetRgb(RgbWStrips) returns (Ack) {}
+  rpc SetWhite(WhiteWStrips) returns (Ack) {}
+  rpc SetGradient(GradientWStrips) returns (Ack) {}
+  rpc GetState(StripIds) returns (States) {}
+  rpc GetStrips(Empty) returns (Strips) {}
+}
+
+message StripIds {
+  repeated int32 strips = 1;
+}
+
+message RgbWStrips {
+  repeated int32 strips = 1;
+  int32 red = 2;
+  int32 green = 3;
+  int32 blue = 4;
+}
+
+message WhiteWStrips {
+  repeated int32 strips = 1;
+  int32 white = 2;
+}
+
+message GradientWStrips {
+  repeated int32 strips = 1;
+  repeated Rgb colors = 2;
+}
+
+message States {
+  repeated StateWStrip states = 1;
+}
+
+message StateWStrip {
+  int32 strip = 1;
+  bool on = 2;
+  repeated Led leds = 3;
+}
+
+message Strips {
+  repeated Strip strips = 1;
+}
+
+message Strip {
+  int32 id = 1;
+  string name = 2;
+}

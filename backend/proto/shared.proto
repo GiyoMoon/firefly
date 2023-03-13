@@ -1,0 +1,21 @@
+syntax = "proto3";
+package firefly;
+
+message Empty {}
+
+message Ack {
+  bool status = 1;
+}
+
+message Rgb {
+  int32 red = 1;
+  int32 green = 2;
+  int32 blue = 3;
+}
+
+message Led {
+  int32 red = 1;
+  int32 green = 2;
+  int32 blue = 3;
+  int32 white = 4;
+}

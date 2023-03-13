@@ -1,4 +1,4 @@
-use crate::firefly::firefly_server::Firefly;
+use crate::firefly::service_server::Service;
 use crate::firefly::{Ack, Empty, Gradient, Led as ProtoLed, Rgb, State as ProtoState, White};
 use crate::led::Led;
 use crate::strip::Strip;
@@ -7,10 +7,10 @@ use tokio::sync::Mutex;
 use tonic::{Code, Request, Response, Status};
 
 #[derive(Debug)]
-pub struct FireflyService {}
+pub struct ServiceService {}
 
 #[tonic::async_trait]
-impl Firefly for FireflyService {
+impl Service for ServiceService {
     async fn on(&self, request: Request<Empty>) -> Result<Response<Ack>, Status> {
         let mut state = request
             .extensions()

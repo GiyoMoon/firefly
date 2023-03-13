@@ -1,8 +1,8 @@
-<div align="center"> <img src="./assets/logo.png" width=200  style="border-radius: 9999px;" /></div>
+<div align="center"> <img src="./assets/logo.png" width=200 /></div>
 <h1 align="center">Firefly</h1>
 <div align="center">
  <strong>
-  Service to control multiple SK6812 RGBW LEDs strips over a webinterface.
+  Service to control multiple SK6812 RGBW LED strips over a webinterface
  </strong>
 </div>
 
