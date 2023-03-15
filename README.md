@@ -1,4 +1,4 @@
-<div align="center"> <img src="./assets/logo.png" width=200 /></div>
+<div align="center"> <img src="./assets/logo_rounded.png" width=200 /></div>
 <h1 align="center">Firefly</h1>
 <div align="center">
  <strong>
