@@ -25,6 +25,19 @@ tonic-build = "0.8"
 # Alpine
 [package.metadata.cross.target.aarch64-unknown-linux-musl]
 pre-build = [
-  "apt-get update",
-  "apt-get install -y protobuf-compiler"
+  "apt update",
+  "apt install -y unzip",
+  "curl -LO https://github.com/protocolbuffers/protobuf/releases/download/v22.2/protoc-22.2-linux-aarch_64.zip",
+  "unzip protoc-22.2-linux-aarch_64.zip -d $HOME/",
+  "cp $HOME/bin/protoc /usr/bin/",
+]
+
+# Debian
+[package.metadata.cross.target.aarch64-unknown-linux-gnu]
+pre-build = [
+  "apt update",
+  "apt install -y unzip",
+  "curl -LO https://github.com/protocolbuffers/protobuf/releases/download/v22.2/protoc-22.2-linux-aarch_64.zip",
+  "unzip protoc-22.2-linux-aarch_64.zip -d $HOME/",
+  "cp $HOME/bin/protoc /usr/bin/",
 ]

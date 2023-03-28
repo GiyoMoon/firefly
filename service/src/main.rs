@@ -17,13 +17,19 @@ use tower_http::add_extension::AddExtensionLayer;
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     dotenvy::dotenv().ok();
 
+    let device = env::var("SPI_DEVICE").expect("SPI_DEVICE env var missing.");
+    let freq = env::var("SPI_FREQ")
+        .expect("SPI_FREQ env var missing.")
+        .parse()?;
     let amount_of_leds = env::var("AMOUNT_OF_LEDS")
         .expect("AMOUNT_OF_LEDS env var missing.")
         .parse()?;
 
-    let strip = Strip::new(amount_of_leds).expect("Failed creating strip");
+    let port = env::var("PORT").expect("PORT env var missing.");
 
-    let addr = "0.0.0.0:9000".parse()?;
+    let strip = Strip::new(&device, freq, amount_of_leds).expect("Failed creating strip");
+
+    let addr = format!("0.0.0.0:{port}").parse()?;
 
     let service_service = ServiceService {};
     let state = FireFlyState { strip };

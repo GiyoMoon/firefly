@@ -15,11 +15,11 @@ pub struct Strip {
 }
 
 impl Strip {
-    pub fn new(amount_of_leds: usize) -> io::Result<Strip> {
-        let mut spi = Spidev::open("/dev/spidev0.0")?;
+    pub fn new(device: &str, freq: u32, amount_of_leds: usize) -> io::Result<Strip> {
+        let mut spi = Spidev::open(device)?;
         let options = SpidevOptions::new()
             .bits_per_word(8)
-            .max_speed_hz(800_000 * 8)
+            .max_speed_hz(freq)
             .mode(SpiModeFlags::SPI_MODE_0)
             .build();
         spi.configure(&options)?;
