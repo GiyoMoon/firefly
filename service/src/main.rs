@@ -4,7 +4,6 @@ pub mod firefly {
 mod led;
 mod service;
 mod strip;
-
 use firefly::service_server::ServiceServer;
 use service::{FireFlyState, ServiceService};
 use std::{env, sync::Arc};

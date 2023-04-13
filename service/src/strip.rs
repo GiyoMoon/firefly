@@ -74,7 +74,8 @@ impl Strip {
     }
 
     fn update(&mut self) -> io::Result<()> {
-        let led_data: Vec<u8> = self.raw_led_data().collect();
+        let mut led_data: Vec<u8> = self.raw_led_data().collect();
+        led_data.insert(0, 0);
         self.spi.write_all(&led_data)?;
         thread::sleep(Duration::from_micros(80));
         Ok(())
