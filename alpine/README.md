@@ -113,6 +113,11 @@ mkfs.fat /dev/{loop1}
 # -o: 172033 * 512, --sizelimit: ? * 512
 losetup -f -o 88080896 --sizelimit 448790016 alpine.img
 mkfs.ext4 /dev/{loop2}
+
+mkdir /mnt/boot/
+mkdir /mnt/rootfs/
+mount /dev/loop1 /mnt/boot/
+mount /dev/loop2 /mnt/rootfs/
 ```
 Create a `boot.cmd` file:
 ```cmd
