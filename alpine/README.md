@@ -27,7 +27,7 @@ cd u-boot
 edit `drivers/power/axp305.c` and insert [this content](./config/axp305.c).
 ```
 make CROSS_COMPILE=aarch64-linux-gnu- BL31=../arm-trusted-firmware/build/sun50i_h616/debug/bl31.bin orangepi_zero2_defconfig
-make menuconfig
+make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- menuconfig
 ```
 Disable `[ ] Networking support` and save config as `.config`.
 ```
@@ -60,7 +60,7 @@ Edit the `drivers/net/wireless/realtek/Makefile` file and insert `obj-$(CONFIG_R
 edit `arch/arm64/boot/dts/allwinner/sun50i-h616-orangepi-zero2.dts` and insert [this content](./config/sun50i-h616-orangepi-zero2.dts).
 ```shell
 make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- defconfig
-make menuconfig
+make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- menuconfig
 ```
 Enable the `Realtek 8723D SDIO or SPI WiFi` module under `Device Drivers` -> `Network device support` -> `Wireless LAN` -> `Realtek devices`.
 ```shell
@@ -68,9 +68,6 @@ make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- -j8 Image
 make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- -j8 dtbs
 
 make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- -j8 modules
-# make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- INSTALL_MOD_PATH=../modules modules modules_install
-
-# make ARCH=arm64 INSTALL_HDR_PATH=../headers headers_install
 cd ..
 ```
 
