@@ -101,18 +101,19 @@ n p 2 172033 default
 w
 ```
 Setup up loop devices and mount them. You can always check them with `losetup -l`:
+- -o: starting sector * sector size, --sizelimit: number of sectors * sector size
+- -o: 40960 * 512, --sizelimit: 131072 * 512
+- -o: 172033 * 512, --sizelimit: ? * 512
 ```shell
 losetup -f ./alpine.img
 
-dd if=./u-boot-sunxi-with-spl.bin of=/dev/{loop0} bs=8K seek=1
+dd if=./u-boot-sunxi-with-spl.bin of=/dev/loop0 bs=8K seek=1
 
-# -o: starting sector * sector size, --sizelimit: number of sectors * sector size
-# -o: 40960 * 512, --sizelimit: 131072 * 512
 losetup -f -o 20971520 --sizelimit 67109376 alpine.img
-mkfs.fat /dev/{loop1}
-# -o: 172033 * 512, --sizelimit: ? * 512
+mkfs.fat /dev/loop1
+
 losetup -f -o 88080896 --sizelimit 448790016 alpine.img
-mkfs.ext4 /dev/{loop2}
+mkfs.ext4 /dev/loop2
 
 mkdir /mnt/boot/
 mkdir /mnt/rootfs/
@@ -132,7 +133,7 @@ cp ./boot.scr /mnt/boot/
 tar -vxf ./rootfs.tar -C /mnt/rootfs/
 
 cd ../linux
-make INSTALL_MOD_PATH=/mnt/rootfs/ modules_install
+make INSTALL_MOD_PATH=/mnt/rootfs modules_install
 cd ../image
 
 sync
@@ -146,5 +147,5 @@ losetup -d /dev/loop0
 
 ## Write image to sd card
 ```shell
-dd if=./alpine.img of=/dev/sdd
+dd if=./alpine.img of=/dev/mmcblk0
 ```
